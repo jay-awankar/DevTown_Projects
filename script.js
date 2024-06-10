@@ -123,20 +123,29 @@ const deleteTask = (e) => {
     const type = e.target.tagName;
 
     const removeTask = state.taskList.filter(({id}) => id !== targetId);
-    updateLocalStorage();
+    
 
     if(type === "BUTTON"){
         return e.target.parentNode.parentNode.parentNode.parentNode.removeChild(
             e.target.parentNode.parentNode.parentNode
         );
+        
     }
-    return e.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode.parentNode.parentNode);
+    
+    if (type === "I") {
+        return e.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
+          e.target.parentNode.parentNode.parentNode.parentNode 
+        );
+    }
+    
+    updateLocalStorage();
+    loadInitialData();
     
 };
 
 // edit task
 const editTask = (e) => {
-    if(!e) e = window.Event;
+    if(!e) e = window.event;
 
     const targetId = e.target.id;
     const type = e.target.tagName;
